@@ -9,7 +9,6 @@ const addBookHandler = (request, h) => {
 		const response = h.response({
 			status: 'fail',
 			message: 'Gagal menambahkan buku. Mohon isi nama buku',
-			name,
 		});
 		response.code(400);
 		return response;
@@ -19,33 +18,6 @@ const addBookHandler = (request, h) => {
 		const response = h.response({
 			status: 'fail',
 			message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
-		});
-		response.code(400);
-		return response;
-	}
-
-	if (!Number.isInteger(Number(year)) || Number(year) < 0) {
-		const response = h.response({
-			status: 'fail',
-			message: 'Gagal menambahkan buku. Tahun harus berupa angka bulat positif',
-		});
-		response.code(400);
-		return response;
-	}
-
-	if (typeof reading !== 'boolean') {
-		const response = h.response({
-			status: 'fail',
-			message: 'Gagal menambahkan buku. Reading harus berupa boolean (true/false)',
-		});
-		response.code(400);
-		return response;
-	}
-
-	if (typeof pageCount !== 'number' || pageCount < 0 || typeof readPage !== 'number' || readPage < 0) {
-		const response = h.response({
-			status: 'fail',
-			message: 'Gagal menambahkan buku. pageCount dan readPage harus berupa angka positif',
 		});
 		response.code(400);
 		return response;
