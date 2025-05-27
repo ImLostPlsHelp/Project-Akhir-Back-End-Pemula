@@ -1,6 +1,7 @@
 const {nanoid} = require('nanoid');
 const books = require('./books');
 
+// Add book
 const addBookHandler = (request, h) => {
 	const {name, year, author, summary, publisher, pageCount, readPage, reading} = request.payload;
 
@@ -55,4 +56,16 @@ const addBookHandler = (request, h) => {
 	return response;
 };
 
-module.exports = {addBookHandler};
+// Get all books
+const getAllBooksHandler = (request, h) => {
+	const response = h.response({
+		status: 'success',
+		data: {
+			books,
+		},
+	});
+	response.code(200);
+	return response;
+};
+
+module.exports = {addBookHandler, getAllBooksHandler};
