@@ -23,6 +23,33 @@ const addBookHandler = (request, h) => {
 		return response;
 	}
 
+	if (typeof year !== 'number' || year < 0) {
+		const response = h.response({
+			status: 'fail',
+			message: 'Gagal menambahkan buku. Tahun harus berupa angka positif',
+		});
+		response.code(400);
+		return response;
+	}
+
+	if (typeof reading !== 'boolean') {
+		const response = h.response({
+			status: 'fail',
+			message: 'Gagal menambahkan buku. Reading harus berupa boolean (true/false)',
+		});
+		response.code(400);
+		return response;
+	}
+
+	if (typeof pageCount !== 'number' || pageCount < 0 || typeof readPage !== 'number' || readPage < 0) {
+		const response = h.response({
+			status: 'fail',
+			message: 'Gagal menambahkan buku. pageCount dan readPage harus berupa angka positif',
+		});
+		response.code(400);
+		return response;
+	}
+
 	const id = nanoid(16);
 	const insertedAt = new Date().toISOString();
 	const updatedAt = insertedAt;
@@ -61,7 +88,11 @@ const getAllBooksHandler = (request, h) => {
 	const response = h.response({
 		status: 'success',
 		data: {
-			books,
+			books: books.map(book => ({
+				id: book.id,
+				name: book.name,
+				publisher: book.publisher,
+			})),
 		},
 	});
 	response.code(200);
