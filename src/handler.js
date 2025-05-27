@@ -9,6 +9,7 @@ const addBookHandler = (request, h) => {
 		const response = h.response({
 			status: 'fail',
 			message: 'Gagal menambahkan buku. Mohon isi nama buku',
+			name,
 		});
 		response.code(400);
 		return response;
@@ -23,10 +24,10 @@ const addBookHandler = (request, h) => {
 		return response;
 	}
 
-	if (typeof year !== 'number' || year < 0) {
+	if (!Number.isInteger(Number(year)) || Number(year) < 0) {
 		const response = h.response({
 			status: 'fail',
-			message: 'Gagal menambahkan buku. Tahun harus berupa angka positif',
+			message: 'Gagal menambahkan buku. Tahun harus berupa angka bulat positif',
 		});
 		response.code(400);
 		return response;
